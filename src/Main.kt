@@ -33,7 +33,7 @@ val iceCreamElements = listOf("Helado", "Tamaño", "Complemento")
 
 //option 2
 val optionsRecommendation = listOf("1. Helados Populares", "2. Recomendaciones por Frutas")
-val fruits = listOf("Fresa", "Chocolate", "Vainilla", "Mango")
+val fruits = listOf("fresa", "platano", "durazno","mango","cereza","papaya")
 
 //option 3
 val ubications = listOf(
@@ -90,7 +90,7 @@ fun menuIceCreams(iceCreams: List<String>) {
     selectElemetIceCream(sizes, 1, "Que tamaño te gustaria?")
     println("Te gustaria añadir un complemento?")
     val addComplement = readLine() ?: ""
-    if (addComplement.lowercase() == "si") {
+    if (addComplement.lowercase() === "si") {
         selectElemetIceCream(
             complements, 2, "Ingresa Tu Complemento" +
                     "Favorito"
@@ -159,11 +159,12 @@ fun modifiedOrder(iceCreamElements: List<String>) {
             "Tu tamaño actual es ${order[1]} $MODIFY_TEXT"
         )
 
-        "complementos" -> selectElemetIceCream(
+        "complemento" -> selectElemetIceCream(
             complements,
             3,
             "Tu complemento actual es: ${order[2]} $MODIFY_TEXT"
         )
+
         else -> invalidOption { modifiedOrder(iceCreamElements) }
     }
     finalOrder()
@@ -189,18 +190,38 @@ fun popularIceCream() {
 }
 
 fun recomendationForFruit() {
-    println("Frutas\n")
+    val iceCreamFruits = mapOf(
+        "Chocolate" to listOf("platano", "fresa"),
+        "Vainilla" to listOf("durazno", "fresa"),
+        "Fresa" to listOf("fresa", "mango"),
+        "Menta" to listOf("mango", "platano"),
+        "Cookies and Cream" to listOf("fresa", "platano"),
+        "Rocky Road" to listOf("fresa", "cereza"),
+        "Mango" to listOf("mango", "papaya"),
+        "Napolitano" to listOf("fresa", "platano")
+    )
+    println("Frutas")
     fruits.forEach() { fruit ->
         println(fruit)
     }
     println("Ingrese la fruta a elegir")
-    val fruitselect = readLine() ?: ""
+    val fruitselect = readLine()?.lowercase() ?: ""
+    val recomendation = mutableListOf<String>()
     //verificar si la fruta existe en el arreglo
-    //buscar nombres de helados en donde exista esa fruta
-
-    //arreglo de ejemplo si eligiera fresa
-    val fresaIceCreams = listOf("Fresa", "Crema de Fresa")
-    menuIceCreams(fresaIceCreams)
+    for ((helado, frutas) in iceCreamFruits) {
+        //buscar nombres de helados en donde exista esa fruta
+        if (fruitselect in frutas) {
+            recomendation.add(helado)
+        }
+    }
+    //si esta vacio
+    if (recomendation.isEmpty()) {
+        println("Lamentamos No tener una recomendacion para ti")
+        main()
+    } else {
+        println("Los Helados recomendados Son: ")
+        menuIceCreams(recomendation)
+    }
 }
 
 fun ubications(name: String) {
