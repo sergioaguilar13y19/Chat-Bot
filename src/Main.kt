@@ -33,7 +33,7 @@ val iceCreamElements = listOf("Helado", "Tamaño", "Complemento")
 
 //option 2
 val optionsRecommendation = listOf("1. Helados Populares", "2. Recomendaciones por Frutas")
-val fruits = listOf("fresa", "platano", "durazno","mango","cereza","papaya")
+val fruits = listOf("fresa", "platano", "durazno", "mango", "cereza", "papaya")
 
 //option 3
 val ubications = listOf(
@@ -161,7 +161,7 @@ fun modifiedOrder(iceCreamElements: List<String>) {
 
         "complemento" -> selectElemetIceCream(
             complements,
-            3,
+            2,
             "Tu complemento actual es: ${order[2]} $MODIFY_TEXT"
         )
 
