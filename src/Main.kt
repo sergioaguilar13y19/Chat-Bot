@@ -90,7 +90,7 @@ fun menuIceCreams(iceCreams: List<String>) {
     selectElemetIceCream(sizes, 1, "Que tamaño te gustaria?")
     println("Te gustaria añadir un complemento?")
     val addComplement = readLine() ?: ""
-    if (addComplement.lowercase() === "si") {
+    if (addComplement.lowercase() == "si") {
         selectElemetIceCream(
             complements, 2, "Ingresa Tu Complemento" +
                     "Favorito"
